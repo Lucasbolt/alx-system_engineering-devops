@@ -1,2 +1,0 @@
-#!/bin/bash
-find -regex '.*.js' | xargs rm
