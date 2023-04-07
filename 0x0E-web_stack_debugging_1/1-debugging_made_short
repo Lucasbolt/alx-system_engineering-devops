@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # shorter script for automating nginx configuration
-
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
+pkill nginx
+service nginx start
