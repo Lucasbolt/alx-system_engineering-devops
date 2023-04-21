@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script executes the command `whoami` as a different user
+#+ the user is passed as an argument to the script.
+
+if [ $# -eq 1 ]
+then
+	sudo -u $1 whoami
+fi
