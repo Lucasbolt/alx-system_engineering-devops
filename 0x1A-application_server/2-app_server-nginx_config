@@ -1,10 +1,17 @@
 server {
         listen 80;
-        server_name web-01.lucasbolt.tech lucasbolt.tech;
+        server_name lucasbolt.tech web-01.lucasbolt.tech 34.224.2.20 localhost;
 
-
+        add_header X-Served-By $HOSTNAME;
         location /airbnb-onepage {
                 include proxy_params;
                 proxy_pass http://localhost:5000;
         }
+
+        error_page 404 /404.html;
+        location /404 {
+                root /var/www/html;
+                internal;
+        }
 }
+
