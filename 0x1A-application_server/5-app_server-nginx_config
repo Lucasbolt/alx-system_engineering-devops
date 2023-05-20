@@ -1,0 +1,44 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+	server_name lucasbolt.tech web-01.lucasbolt.tech 34.224.2.20 localhost www.lucasbolt.tech;
+	
+	add_header X-Served-By $HOSTNAME;
+	location /airbnb-onepage {
+		include proxy_params;
+		proxy_pass http://localhost:5000;
+	}
+	
+	error_page 404 /404.html;
+	location /404 {
+		root /var/www/html;
+		internal;
+	}
+	root   /var/www/html;
+	index  index.html index.htm;
+	location /hbnb_static {
+        	alias /data/web_static/current;
+        	index 8-index.html index.htm;
+    	}
+	location /redirect_me {
+        	return 301 http://github.com/Lucasbolt;
+    	}
+	
+	location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+	}
+
+	location /api/ {
+		proxy_pass http://127.0.0.1:5002;
+	}
+
+	location / {
+		proxy_pass http://127.0.0.1:5003/2-hbnb/;
+	}
+
+	location /static {
+		autoindex off;
+		alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static;
+	}
+}
