@@ -3,4 +3,4 @@
 
 
 PID=$(sudo lsof -i :5003 | grep 'gunicorn' | cut -d ' ' -f2 | tr '\n' ' ' | cut -d ' ' -f1)
-kill -s HUP $PID
+kill -s HUP "$PID"
